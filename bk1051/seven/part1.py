@@ -21,16 +21,28 @@ def select_rows(array, rows):
 
 	array is a NumPy array.
 	rows is an iterable
+
+	Uses np.r_[], which is mentioned in
+	"Tentative NumPy Tutorial"
 	'''
-	pass
+	return array[rows, :]
+	
 
 def select_cols(array, cols):
 	'''Returns specified columns of an array.
 
 	array is a NumPy array.
 	cols is an iterable
+
+	Uses np.c_[], which is mentioned in
+	"Tentative NumPy Tutorial"
+	
 	'''
-	pass
+	return array[:, cols]
+	# if len(cols) > 1:
+	# 	return array[:, cols]
+	# else:
+	# 	return array[:, cols][:, np.newaxis]
 
 def select(array, start, end):
 	'''Returns a rectangular portion of an array.

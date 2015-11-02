@@ -30,7 +30,8 @@ class Part1TestCase(unittest.TestCase):
 
 	def test_select_cols(self):
 		array = p1.wrapped_array(1, 15, 3)
-		test_array = p1.select_cols(array, (1))
+		test_array = p1.select_cols(array, [1])
+		print test_array
 		success = np.array([
 				[6],
 				[7],
@@ -38,6 +39,7 @@ class Part1TestCase(unittest.TestCase):
 				[9],
 				[10]
 			])
+		print success
 		# Assert all elements of arrays are equal
 		self.assertTrue((test_array==success).all())
 
