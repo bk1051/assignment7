@@ -39,10 +39,7 @@ def select_cols(array, cols):
 	
 	'''
 	return array[:, cols]
-	# if len(cols) > 1:
-	# 	return array[:, cols]
-	# else:
-	# 	return array[:, cols][:, np.newaxis]
+
 
 def select(array, start, end):
 	'''Returns a rectangular portion of an array.
@@ -53,14 +50,53 @@ def select(array, start, end):
 	end is a tuple/list with the coordinates for the
 		lower right of the rectangular portion
 	'''
-	pass
+	return array[start[0]:end[0]+1, start[1]:end[1]+1]
 
-def filter(array, function):
+
+def filter_array(array, function):
 	'''Returns an array where each value is filtered.
 
 	For each value in the array, the value is passed
 	to function. If the result is True, the value is 
 	included in the final array. If it is false, it is
-	replaced with missing (np.nan)
+	replaced with missing (None)
 	'''
-	pass
+	# Create an array of same shape as array, but all missing
+	result = np.empty(array.shape, dtype='bool')
+	missing = np.empty(array.shape).fill(np.nan)
+
+	for r, row in enumerate(array):
+		for c, value in enumerate(row):
+			result[r, c] = function(value)
+
+	# np.where replaces the np.nan values in missing with None
+	return np.where(result, array, missing)
+
+def question_1a(array):
+	print select_rows(array, (1, 3))
+
+def question_1b(array):
+	print select_cols(array, [1])
+
+def question_1c(array):
+	print select(array, (1, 0), (3, 2))
+
+def question_1d(array):
+	print filter_array(array, lambda x: 3 <= x <= 11)
+
+def run():
+	array = wrapped_array(1, 15, 3)
+	print array
+	question_1a(array)
+	question_1b(array)
+	question_1c(array)
+	question_1d(array)
+		
+
+
+
+
+
+
+
+

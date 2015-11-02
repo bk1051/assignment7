@@ -6,3 +6,6 @@ This program outputs stuff.
 
 '''
 
+import seven.part1
+
+seven.part1.run()

@@ -46,23 +46,25 @@ class Part1TestCase(unittest.TestCase):
 	def test_select(self):
 		array = p1.wrapped_array(1, 15, 3)
 		test_array = p1.select(array, (1, 0), (3, 2))
+		print test_array
 		success = np.array([
 				[2, 7, 12],
 				[3,  8, 13],
 			 	[4,  9, 14]
 			])
+		print success
 		# Assert all elements of arrays are equal
 		self.assertTrue((test_array==success).all())
 
-	def test_filter(self):
+	def test_filter_array(self):
 		array = p1.wrapped_array(1, 15, 3)
-		test_array = p1.filter(array, lambda x: 3 <= x <= 11)
+		test_array = p1.filter_array(array, lambda x: 3 <= x <= 11)
 		success = np.array([
-				[np.nan,  6, 11],
-				[np.nan,  7, np.nan],
-			 	[3,  8, np.nan],
-			 	[4,  9, np.nan],
-			 	[5, 10, np.nan]
+				[None,  6, 11],
+				[None,  7, None],
+			 	[3,  8, None],
+			 	[4,  9, None],
+			 	[5, 10, None]
 			])
 		# Assert all elements of arrays are equal
 		self.assertTrue((test_array==success).all())
