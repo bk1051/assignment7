@@ -28,10 +28,9 @@ def divide_columns(array, denominators):
 
 
 def run():
+	'''Run to create output for part 2'''
 	a = np.arange(25).reshape(5, 5)
 	b = np.array([1., 5, 10, 15, 20])
-	# Start with missing array
-	#result = np.empty(a.shape).fill(np.nan)
 	print divide_columns(a, b)
 
 
