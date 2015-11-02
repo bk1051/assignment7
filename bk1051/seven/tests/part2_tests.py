@@ -39,4 +39,19 @@ class Part2TestCase(unittest.TestCase):
 	def test_divide_columns(self):
 		a = np.arange(25).reshape(5, 5)
 		b = np.array([1., 5, 10, 15, 20])
-		print p2.divide_columns(a, b)
+
+		a0 = p1.select_cols(a, [0])
+		a1 = p1.select_cols(a, [1])
+		a2 = p1.select_cols(a, [2])
+		a3 = p1.select_cols(a, [3])
+		a4 = p1.select_cols(a, [4])
+		
+
+		test_array = p2.divide_columns(a, b)
+		success = np.hstack([
+			p2.divide_elementwise(a0, b),
+			p2.divide_elementwise(a1, b),
+			p2.divide_elementwise(a2, b),
+			p2.divide_elementwise(a3, b),
+			p2.divide_elementwise(a4, b)	
+			])
