@@ -84,3 +84,75 @@ class SuperArrayTestCase(unittest.TestCase):
 			])
 		# Assert all elements of arrays are equal
 		self.assertTrue((test_array==success).all())
+
+	def test_divide_elementwise(self):
+		a = sa.SuperArray(np.arange(25).reshape(5, 5))
+		a0 = a.select_cols([0])
+		b = np.array([1., 5, 10, 15, 20])
+		test_array = a._divide_column_elementwise(a0, b)
+		success = np.array([[0], 
+							[1], 
+							[1],
+							[1],
+							[1]])
+		print test_array
+		print success
+		self.assertTrue(
+			(test_array==success).all()
+			)
+
+		a3 = a.select_cols([3])
+		test_array = a._divide_column_elementwise(a3, b)
+		success = np.array(
+			[[3/1.], 
+			[8/5.],
+			[ 13/10.], 
+			[18/15.], 
+			[23/20.]])
+		print test_array
+		print success
+		self.assertTrue(
+			(test_array==success).all())
+
+	def test_divide_columns(self):
+		a = sa.SuperArray(np.arange(25).reshape(5, 5))
+		b = np.array([1., 5, 10, 15, 20])
+
+		a0 = a.select_cols([0])
+		a1 = a.select_cols([1])
+		a2 = a.select_cols([2])
+		a3 = a.select_cols([3])
+		a4 = a.select_cols([4])
+		
+
+		test_array = a.divide_columns(b)
+		success = np.hstack([
+			a._divide_column_elementwise(a0, b),
+			a._divide_column_elementwise(a1, b),
+			a._divide_column_elementwise(a2, b),
+			a._divide_column_elementwise(a3, b),
+			a._divide_column_elementwise(a4, b)	
+			])
+
+
+	# Test factory methods
+	def test_wrapped_array(self):
+		test_array = sa.wrapped_array(1, 15, 3)
+		success = sa.SuperArray(
+			[[1,  6, 11],
+			 [2,  7, 12],
+			 [3,  8, 13],
+			 [4,  9, 14],
+			 [5, 10, 15]]
+			)
+		# Assert all elements of arrays are equal
+		self.assertTrue((test_array==success).all())
+
+
+
+
+
+
+
+
+

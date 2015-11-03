@@ -57,3 +57,39 @@ class SuperArray(np.ndarray):
 
 		# np.where replaces the np.nan values in missing with None
 		return np.where(result, self, missing)
+
+	def _divide_column_elementwise(self, numerators, denominators):
+		'''Divide a column vector by another column vector,
+		elementwise, and return the result.
+
+		numerators is a column vector
+		denominators is a row or column vector
+		'''
+		if denominators.ndim == 1:
+			denominators = denominators[:, np.newaxis]
+
+		return numerators.astype('float') / denominators.astype('float')
+
+	def divide_columns(self, denominators):
+		'''Divide each column, elementwise, by a vector
+		of denominators.'''
+		result = np.empty((denominators.shape[0], 0))
+
+		col_indices = range(self.shape[1])
+		for c in col_indices:
+			col = self.select_cols([c])
+			result = np.hstack((result, 
+				self._divide_column_elementwise(col, denominators)))
+
+		return result
+
+
+
+
+
+
+
+
+
+
+
