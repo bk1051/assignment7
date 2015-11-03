@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-class mandelbrotIterator(object):
-    '''Uses some information from:
+class MandelbrotIterator(object):
+    '''Uses some information on complex numbers in Python from:
     http://kestrel.nmt.edu/~raymond/software/python_notes/paper003.html
     '''
 
@@ -28,12 +28,10 @@ class mandelbrotIterator(object):
         return z
 
     def get_mandelbrot_set(self, threshold):
-        print self.iterate()
         return np.abs(self.iterate()) < threshold
 
     def output_image(self, threshold, filename='mandelbrot.png'):
         mask = self.get_mandelbrot_set(threshold)
-        print mask
         plt.imshow(mask.T, extent=[self.x_bounds[0], self.x_bounds[1], self.y_bounds[0], self.y_bounds[1]])
         plt.gray()
         plt.savefig(filename)
