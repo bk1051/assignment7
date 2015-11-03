@@ -75,13 +75,7 @@ class SuperArrayTestCase(unittest.TestCase):
 			 [5, 10, 15]]
 			)
 		test_array = array.filter_array(lambda x: 3 <= x <= 11)
-		success = np.array([
-				[None,  6, 11],
-				[None,  7, None],
-			 	[3,  8, None],
-			 	[4,  9, None],
-			 	[5, 10, None]
-			])
+		success = np.arange(3, 12)
 		# Assert all elements of arrays are equal
 		self.assertTrue((test_array==success).all())
 

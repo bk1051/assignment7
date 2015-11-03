@@ -40,23 +40,20 @@ class SuperArray(np.ndarray):
 
 
 	def filter_array(self, function):
-		'''Returns an array where each value is filtered.
+		'''Returns a 1-d array containing only values
+		that pass a filter function.
 
 		For each value in the array, the value is passed
 		to function. If the result is True, the value is 
 		included in the final array. If it is false, it is
-		replaced with missing (None)
+		not included. The result array is sorted before being
+		returned.
 		'''
-		# Create an array of same shape as array, but all missing
-		result = np.empty(self.shape, dtype='bool')
-		missing = np.empty(self.shape).fill(np.nan)
-
-		for r, row in enumerate(self):
-			for c, value in enumerate(row):
-				result[r, c] = function(value)
-
-		# np.where replaces the np.nan values in missing with None
-		return np.where(result, self, missing)
+		result = []
+		for value in self.flat:
+			if function(value):
+				result.append(value)
+		return sorted(result)
 
 	def _divide_column_elementwise(self, numerators, denominators):
 		'''Divide a column vector by another column vector,
