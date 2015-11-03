@@ -135,6 +135,27 @@ class SuperArrayTestCase(unittest.TestCase):
 			])
 
 
+	def test_pick_col_closest_to(self):
+		np.random.seed(12345)
+		array = sa.SuperArray(np.random.rand(10, 3))
+		success = np.array([
+				[0.31637555],  
+				[0.56772503],  
+				[0.6531771],  
+				[0.65356987],  
+				[0.29870371],
+         		[0.65641118],  
+         		[0.64247533],  
+         		[0.46759901],  
+         		[0.43964461],  
+         		[0.67687371]
+			])
+		test_array = array.pick_col_closest_to(0.5)
+		diff = np.abs(test_array - success)
+		print test_array
+		self.assertTrue((diff < 0.00001).all())
+
+
 	# Test factory methods
 	def test_wrapped_array(self):
 		test_array = sa.wrapped_array(1, 15, 3)

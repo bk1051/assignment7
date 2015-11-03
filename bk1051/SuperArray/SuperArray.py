@@ -83,6 +83,21 @@ class SuperArray(np.ndarray):
 
 		return result
 
+	def pick_col_closest_to(self, target):
+		'''Return a column vector where each row is
+		the element in the original array's row that
+		is closest to the target value.
+		'''
+		# Get an array of the distance from target
+		array_abs = np.abs(self - target)
+		# Get the indices needed to sort each row across
+		argsorted = array_abs.argsort(axis=1)
+		# The first index is the index of the min col in the row
+		min_col = argsorted.select_cols([0])
+
+		# Return the array for each row using the index in min_col
+		return self[np.arange(self.shape[0]), min_col.T][0][:, np.newaxis]
+
 
 
 

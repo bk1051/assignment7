@@ -8,6 +8,7 @@ This program outputs stuff.
 
 import SuperArray as sa
 import numpy as np
+import seven.mandelbrotIterator as mi
 
 
 '''Question 1'''
@@ -46,4 +47,20 @@ a = sa.SuperArray(np.arange(25).reshape(5, 5))
 b = sa.SuperArray([1., 5, 10, 15, 20])
 print "\n\nQuestion 2:\n"
 print a.divide_columns(b)
+
+
+'''Question 3'''
+
+
+
+'''Question 4'''
+foo = mi.mandelbrotIterator()
+foo.output_image(2)
+foo.output_image(1, 'mandelbrot1.png')
+foo.output_image(3, 'mandelbrot3.png')
+
+bar = mi.mandelbrotIterator(n_max=10)
+bar.output_image(2, 'mandelbrot_bar.png')
+
+
 
